@@ -10,7 +10,7 @@ using promotion_net.Services.Products.Interfaces;
 namespace promotion_net.Controllers
 {
     [ApiController]
-    // [Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     public class ProductController : ControllerBase
     {

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("promotion-net")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d67885a0abee78464629ce7ab49b9c052f3b4898")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3a1661804f87cb27ab5ce85d3797c5ac2f3e887c")]
 [assembly: System.Reflection.AssemblyProductAttribute("promotion-net")]
 [assembly: System.Reflection.AssemblyTitleAttribute("promotion-net")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
