@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using promotion_net.Data;
 
@@ -11,9 +12,11 @@ using promotion_net.Data;
 namespace promotion_net.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251014083222_InitProductPromotion")]
+    partial class InitProductPromotion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,47 +52,9 @@ namespace promotion_net.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("ca732122-4d34-40ed-a4f3-eb75c42c4063"),
-                            Code = "P001",
-                            CreatedAt = new DateTime(2025, 10, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6047),
-                            Description = "Điện thoại iPhone 16 Pro mới nhất với nhiều tính năng vượt trội.",
-                            IsActive = true,
-                            Name = "iPhone 16 Pro",
-                            Price = 1000000m,
-                            UpdatedAt = new DateTime(2025, 10, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6013)
-                        },
-                        new
-                        {
-                            Id = new Guid("75b46b0d-543b-42fe-bd01-75c1519af1b7"),
-                            Code = "P002",
-                            CreatedAt = new DateTime(2025, 10, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6050),
-                            Description = "Điện thoại Samsung Galaxy S24 Ultra với camera chất lượng cao.",
-                            IsActive = true,
-                            Name = "Samsung Galaxy S24 Ultra",
-                            Price = 900000m,
-                            UpdatedAt = new DateTime(2025, 10, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6048)
-                        },
-                        new
-                        {
-                            Id = new Guid("c8801b15-2171-4d74-b739-2168499c3eee"),
-                            Code = "P003",
-                            CreatedAt = new DateTime(2025, 10, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6099),
-                            Description = "Điện thoại Google Pixel 8 Pro với trải nghiệm Android thuần túy.",
-                            IsActive = true,
-                            Name = "Google Pixel 8 Pro",
-                            Price = 800000m,
-                            UpdatedAt = new DateTime(2025, 10, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6093)
-                        });
                 });
 
             modelBuilder.Entity("promotion_net.Models.PromotionProducts.PromotionProduct", b =>
@@ -140,41 +105,6 @@ namespace promotion_net.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Promotions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("b298801f-0bc0-46c4-8c95-56920bb074d1"),
-                            Code = "PROMO10",
-                            Description = "Giảm giá 10% cho tất cả các sản phẩm trong dịp lễ.",
-                            DiscountPercent = 10m,
-                            EndDate = new DateTime(2025, 11, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6135),
-                            IsActive = true,
-                            Name = "Giảm giá 10%",
-                            StartDate = new DateTime(2025, 10, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6134)
-                        },
-                        new
-                        {
-                            Id = new Guid("84883ffa-1cf9-483d-8b29-d67bf2b4b135"),
-                            Code = "PROMO20",
-                            Description = "Giảm giá 20% cho các sản phẩm điện thoại cao cấp.",
-                            DiscountPercent = 20m,
-                            EndDate = new DateTime(2025, 11, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6143),
-                            IsActive = true,
-                            Name = "Giảm giá 20%",
-                            StartDate = new DateTime(2025, 10, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6143)
-                        },
-                        new
-                        {
-                            Id = new Guid("f1066cb7-1a63-4629-b1ae-4a83f89f87a1"),
-                            Code = "WELCOME15",
-                            Description = "Chào mừng bạn mới đến với cửa hàng, giảm giá 15% cho đơn hàng đầu tiên.",
-                            DiscountPercent = 15m,
-                            EndDate = new DateTime(2025, 11, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6146),
-                            IsActive = true,
-                            Name = "Giảm giá 15%",
-                            StartDate = new DateTime(2025, 10, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6146)
-                        });
                 });
 
             modelBuilder.Entity("promotion_net.Models.Users.User", b =>
@@ -222,12 +152,12 @@ namespace promotion_net.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c78fbd51-276b-4020-ab46-e3264bad1850"),
-                            CreatedAt = new DateTime(2025, 10, 14, 9, 44, 17, 146, DateTimeKind.Utc).AddTicks(8859),
+                            Id = new Guid("b4c34c5f-eb1c-4541-8207-77d94d50f709"),
+                            CreatedAt = new DateTime(2025, 10, 14, 8, 32, 21, 68, DateTimeKind.Utc).AddTicks(5368),
                             Email = "nguyenhiengiabao12@gmail.com",
                             FullName = "Nguyen Hien Gia Bao",
                             IsActive = true,
-                            PasswordHash = "$2a$11$Qw8SmJuc8VPnN4MBQvLBz.8kEOb6USPk1QOeohCNVBChtRxtUHmum",
+                            PasswordHash = "$2a$11$Ij1sAKGc7etaE0l6W6c.yOZM5MuiULINNt9zLmPhTa7H4lzmF6VEC",
                             PhoneNumber = "0123456789",
                             Role = 0
                         });

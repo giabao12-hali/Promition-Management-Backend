@@ -7,6 +7,10 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Components.Web;
+using promotion_net.Services.Products.Interfaces;
+using promotion_net.Services.Products.Services;
+using promotion_net.Services.Promotions.Interfaces;
+using promotion_net.Services.Promotions.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +27,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddSingleton<IJwtService, JwtService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+// builder.Services.AddScoped<IPromotionService, PromotionService>();
 
 builder.Services.AddAuthentication(options =>
 {
