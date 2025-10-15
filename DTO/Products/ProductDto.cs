@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using promotion_net.DTO.Categories;
+using promotion_net.Models.Categories;
 
 namespace promotion_net.DTO.Products
 {
@@ -15,5 +17,7 @@ namespace promotion_net.DTO.Products
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+        public Guid? CategoryId { get; set; }
+        public CategoryDto? Category { get; set; }
     }
 }

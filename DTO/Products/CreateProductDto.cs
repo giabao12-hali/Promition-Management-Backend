@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using promotion_net.Models.Categories;
 
 namespace promotion_net.DTO.Products
 {
@@ -16,5 +17,6 @@ namespace promotion_net.DTO.Products
         [Range(0, double.MaxValue)]
         public decimal Price { get; set; }
         public bool IsActive { get; set; } = true;
+        public Guid? CategoryId { get; set; }
     }
 }

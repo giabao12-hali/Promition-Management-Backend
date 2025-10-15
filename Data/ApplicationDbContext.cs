@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using promotion_net.Models.Categories;
 using promotion_net.Models.Products;
 using promotion_net.Models.PromotionProducts;
 using promotion_net.Models.Promotions;
@@ -20,6 +21,7 @@ namespace promotion_net.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<PromotionProduct> PromotionProducts { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -42,6 +44,12 @@ namespace promotion_net.Data
             );
 
             // mối quan hệ của product - promotions
+            modelBuilder.Entity<Product>()
+                .HasOne(p => p.Category)
+                .WithMany(c => c.Products)
+                .HasForeignKey(p => p.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<PromotionProduct>()
                 .HasKey(pp => new { pp.ProductId, pp.PromotionId });
 
@@ -54,6 +62,34 @@ namespace promotion_net.Data
                 .HasOne(pp => pp.Promotion)
                 .WithMany(p => p.PromotionProducts)
                 .HasForeignKey(pp => pp.PromotionId);
+
+            // Seed categories
+            modelBuilder.Entity<Category>().HasData(
+                new Category
+                {
+                    Id = Guid.NewGuid(),
+                    Code = "CAT001",
+                    Name = "Điện thoại",
+                    Description = "Các loại điện thoại thông minh.",
+                    ParentId = null
+                },
+                new Category
+                {
+                    Id = Guid.NewGuid(),
+                    Code = "CAT002",
+                    Name = "Laptop",
+                    Description = "Các loại máy tính xách tay.",
+                    ParentId = null
+                },
+                new Category
+                {
+                    Id = Guid.NewGuid(),
+                    Code = "CAT003",
+                    Name = "Phụ kiện",
+                    Description = "Các loại phụ kiện điện tử.",
+                    ParentId = null
+                }
+            );
 
             // seed data for Products
             modelBuilder.Entity<Product>().HasData(

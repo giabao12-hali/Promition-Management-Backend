@@ -22,10 +22,63 @@ namespace promotion_net.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("promotion_net.Models.Categories.Category", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("a5722d32-f250-4fb5-93ff-b3df0beb9885"),
+                            Code = "CAT001",
+                            Description = "Các loại điện thoại thông minh.",
+                            Name = "Điện thoại"
+                        },
+                        new
+                        {
+                            Id = new Guid("7e992b46-29c8-42c9-8bd2-fb28705e12c3"),
+                            Code = "CAT002",
+                            Description = "Các loại máy tính xách tay.",
+                            Name = "Laptop"
+                        },
+                        new
+                        {
+                            Id = new Guid("d38777bb-4c6a-4098-beae-8e22e2590e84"),
+                            Code = "CAT003",
+                            Description = "Các loại phụ kiện điện tử.",
+                            Name = "Phụ kiện"
+                        });
+                });
+
             modelBuilder.Entity("promotion_net.Models.Products.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Code")
@@ -54,41 +107,43 @@ namespace promotion_net.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Products");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ca732122-4d34-40ed-a4f3-eb75c42c4063"),
+                            Id = new Guid("a8d655e5-de45-489c-9a71-fbf7530433a5"),
                             Code = "P001",
-                            CreatedAt = new DateTime(2025, 10, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6047),
+                            CreatedAt = new DateTime(2025, 10, 15, 5, 10, 0, 971, DateTimeKind.Utc).AddTicks(1211),
                             Description = "Điện thoại iPhone 16 Pro mới nhất với nhiều tính năng vượt trội.",
                             IsActive = true,
                             Name = "iPhone 16 Pro",
                             Price = 1000000m,
-                            UpdatedAt = new DateTime(2025, 10, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6013)
+                            UpdatedAt = new DateTime(2025, 10, 15, 5, 10, 0, 971, DateTimeKind.Utc).AddTicks(1203)
                         },
                         new
                         {
-                            Id = new Guid("75b46b0d-543b-42fe-bd01-75c1519af1b7"),
+                            Id = new Guid("cd18fb4f-91ef-4adc-bde6-f0d9ebd6f317"),
                             Code = "P002",
-                            CreatedAt = new DateTime(2025, 10, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6050),
+                            CreatedAt = new DateTime(2025, 10, 15, 5, 10, 0, 971, DateTimeKind.Utc).AddTicks(1214),
                             Description = "Điện thoại Samsung Galaxy S24 Ultra với camera chất lượng cao.",
                             IsActive = true,
                             Name = "Samsung Galaxy S24 Ultra",
                             Price = 900000m,
-                            UpdatedAt = new DateTime(2025, 10, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6048)
+                            UpdatedAt = new DateTime(2025, 10, 15, 5, 10, 0, 971, DateTimeKind.Utc).AddTicks(1212)
                         },
                         new
                         {
-                            Id = new Guid("c8801b15-2171-4d74-b739-2168499c3eee"),
+                            Id = new Guid("7f8c053f-5705-4862-bd79-183e43d0a29c"),
                             Code = "P003",
-                            CreatedAt = new DateTime(2025, 10, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6099),
+                            CreatedAt = new DateTime(2025, 10, 15, 5, 10, 0, 971, DateTimeKind.Utc).AddTicks(1224),
                             Description = "Điện thoại Google Pixel 8 Pro với trải nghiệm Android thuần túy.",
                             IsActive = true,
                             Name = "Google Pixel 8 Pro",
                             Price = 800000m,
-                            UpdatedAt = new DateTime(2025, 10, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6093)
+                            UpdatedAt = new DateTime(2025, 10, 15, 5, 10, 0, 971, DateTimeKind.Utc).AddTicks(1215)
                         });
                 });
 
@@ -144,36 +199,36 @@ namespace promotion_net.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b298801f-0bc0-46c4-8c95-56920bb074d1"),
+                            Id = new Guid("e09e7987-2261-4e15-9926-25f00d57d38f"),
                             Code = "PROMO10",
                             Description = "Giảm giá 10% cho tất cả các sản phẩm trong dịp lễ.",
                             DiscountPercent = 10m,
-                            EndDate = new DateTime(2025, 11, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6135),
+                            EndDate = new DateTime(2025, 11, 15, 5, 10, 0, 971, DateTimeKind.Utc).AddTicks(1255),
                             IsActive = true,
                             Name = "Giảm giá 10%",
-                            StartDate = new DateTime(2025, 10, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6134)
+                            StartDate = new DateTime(2025, 10, 15, 5, 10, 0, 971, DateTimeKind.Utc).AddTicks(1254)
                         },
                         new
                         {
-                            Id = new Guid("84883ffa-1cf9-483d-8b29-d67bf2b4b135"),
+                            Id = new Guid("24ee8686-8beb-48cf-a0e8-2dc3e9255541"),
                             Code = "PROMO20",
                             Description = "Giảm giá 20% cho các sản phẩm điện thoại cao cấp.",
                             DiscountPercent = 20m,
-                            EndDate = new DateTime(2025, 11, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6143),
+                            EndDate = new DateTime(2025, 11, 15, 5, 10, 0, 971, DateTimeKind.Utc).AddTicks(1262),
                             IsActive = true,
                             Name = "Giảm giá 20%",
-                            StartDate = new DateTime(2025, 10, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6143)
+                            StartDate = new DateTime(2025, 10, 15, 5, 10, 0, 971, DateTimeKind.Utc).AddTicks(1262)
                         },
                         new
                         {
-                            Id = new Guid("f1066cb7-1a63-4629-b1ae-4a83f89f87a1"),
+                            Id = new Guid("1dc231f7-29e5-478d-bb41-2c1038438ed4"),
                             Code = "WELCOME15",
                             Description = "Chào mừng bạn mới đến với cửa hàng, giảm giá 15% cho đơn hàng đầu tiên.",
                             DiscountPercent = 15m,
-                            EndDate = new DateTime(2025, 11, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6146),
+                            EndDate = new DateTime(2025, 11, 15, 5, 10, 0, 971, DateTimeKind.Utc).AddTicks(1265),
                             IsActive = true,
                             Name = "Giảm giá 15%",
-                            StartDate = new DateTime(2025, 10, 14, 9, 44, 17, 147, DateTimeKind.Utc).AddTicks(6146)
+                            StartDate = new DateTime(2025, 10, 15, 5, 10, 0, 971, DateTimeKind.Utc).AddTicks(1265)
                         });
                 });
 
@@ -222,15 +277,34 @@ namespace promotion_net.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c78fbd51-276b-4020-ab46-e3264bad1850"),
-                            CreatedAt = new DateTime(2025, 10, 14, 9, 44, 17, 146, DateTimeKind.Utc).AddTicks(8859),
+                            Id = new Guid("87c7df5b-eb5e-41c2-8843-d1313ef246d2"),
+                            CreatedAt = new DateTime(2025, 10, 15, 5, 10, 0, 970, DateTimeKind.Utc).AddTicks(3007),
                             Email = "nguyenhiengiabao12@gmail.com",
                             FullName = "Nguyen Hien Gia Bao",
                             IsActive = true,
-                            PasswordHash = "$2a$11$Qw8SmJuc8VPnN4MBQvLBz.8kEOb6USPk1QOeohCNVBChtRxtUHmum",
+                            PasswordHash = "$2a$11$uUHKx.dEE6Vze.esnUaEk.9XB5MYzG4X1lwsm/EUP8ErCQjRL33e.",
                             PhoneNumber = "0123456789",
                             Role = 0
                         });
+                });
+
+            modelBuilder.Entity("promotion_net.Models.Categories.Category", b =>
+                {
+                    b.HasOne("promotion_net.Models.Categories.Category", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
+                });
+
+            modelBuilder.Entity("promotion_net.Models.Products.Product", b =>
+                {
+                    b.HasOne("promotion_net.Models.Categories.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("promotion_net.Models.PromotionProducts.PromotionProduct", b =>
@@ -250,6 +324,13 @@ namespace promotion_net.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("Promotion");
+                });
+
+            modelBuilder.Entity("promotion_net.Models.Categories.Category", b =>
+                {
+                    b.Navigation("Children");
+
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("promotion_net.Models.Products.Product", b =>

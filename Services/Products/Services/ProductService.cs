@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using promotion_net.Data;
+using promotion_net.DTO.Categories;
 using promotion_net.DTO.Products;
+using promotion_net.Models.Categories;
 using promotion_net.Models.Products;
 using promotion_net.Services.Products.Interfaces;
 
@@ -30,7 +32,8 @@ namespace promotion_net.Services.Products.Services
                 Price = dto.Price,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
-                IsActive = dto.IsActive
+                IsActive = dto.IsActive,
+                CategoryId = dto.CategoryId,
             };
 
             _context.Products.Add(product);
@@ -45,7 +48,8 @@ namespace promotion_net.Services.Products.Services
                 Price = product.Price,
                 IsActive = product.IsActive,
                 CreatedAt = product.CreatedAt,
-                UpdatedAt = product.UpdatedAt
+                UpdatedAt = product.UpdatedAt,
+                CategoryId = product.CategoryId,
             };
         }
 
@@ -62,7 +66,9 @@ namespace promotion_net.Services.Products.Services
 
         public async Task<IEnumerable<ProductDto>> GetAllAsync()
         {
-            var products = await _context.Products.ToListAsync();
+            var products = await _context.Products
+                .Include(p => p.Category)
+                .ToListAsync();
             return products.Select(p => new ProductDto
             {
                 Id = p.Id,
@@ -72,7 +78,13 @@ namespace promotion_net.Services.Products.Services
                 Price = p.Price,
                 IsActive = p.IsActive,
                 CreatedAt = p.CreatedAt,
-                UpdatedAt = p.UpdatedAt
+                UpdatedAt = p.UpdatedAt,
+                Category = p.Category == null ? null : new CategoryDto
+                {
+                    Id = p.Category.Id,
+                    Name = p.Category.Name,
+                    Description = p.Category.Description,
+                }
             });
         }
 
@@ -90,7 +102,14 @@ namespace promotion_net.Services.Products.Services
                 Price = product.Price,
                 IsActive = product.IsActive,
                 CreatedAt = product.CreatedAt,
-                UpdatedAt = product.UpdatedAt
+                UpdatedAt = product.UpdatedAt,
+                CategoryId = product.CategoryId,
+                Category = product.Category == null ? null : new CategoryDto
+                {
+                    Id = product.Category.Id,
+                    Name = product.Category.Name,
+                    Description = product.Category.Description,
+                }
             };
         }
 
@@ -106,6 +125,7 @@ namespace promotion_net.Services.Products.Services
             product.IsActive = dto.IsActive;
             product.UpdatedAt = DateTime.UtcNow;
             product.CreatedAt = product.CreatedAt;
+            product.CategoryId = dto.CategoryId;
 
             _context.Products.Update(product);
             await _context.SaveChangesAsync();
@@ -119,7 +139,8 @@ namespace promotion_net.Services.Products.Services
                 Price = product.Price,
                 IsActive = product.IsActive,
                 CreatedAt = product.CreatedAt,
-                UpdatedAt = product.UpdatedAt
+                UpdatedAt = product.UpdatedAt,
+                CategoryId = product.CategoryId
             };
         }
     }
