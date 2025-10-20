@@ -8,8 +8,8 @@ namespace promotion_net.DTO.Promotions
 {
     public class UpdatePromotionDto
     {
-        [Required]
-        public Guid Id { get; set; }
+        // [Required]
+        // public Guid Id { get; set; }
         [StringLength(50)]
         public string? Code { get; set; }
 
@@ -20,10 +20,10 @@ namespace promotion_net.DTO.Promotions
         public string? Description { get; set; }
 
         [Range(0, 100)]
-        public decimal? DiscountPercent { get; set; }
+        public decimal DiscountPercent { get; set; }
 
-        public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-        public bool? IsActive { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public bool IsActive { get; set; }
     }
 }

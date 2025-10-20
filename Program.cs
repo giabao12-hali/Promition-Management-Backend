@@ -13,6 +13,7 @@ using promotion_net.Services.Promotions.Interfaces;
 using promotion_net.Services.Promotions.Services;
 using promotion_net.Services.Categories.Interfaces;
 using promotion_net.Services.Categories.Services;
+using promotion_net.Models.Promotions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,7 +32,7 @@ builder.Services.AddSingleton<IJwtService, JwtService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
-// builder.Services.AddScoped<IPromotionService, PromotionService>();
+builder.Services.AddScoped<IPromotionService, PromotionService>();
 
 builder.Services.AddAuthentication(options =>
 {
