@@ -18,5 +18,7 @@ namespace promotion_net.DTO.Products
         public decimal Price { get; set; }
         public bool IsActive { get; set; } = true;
         public Guid? CategoryId { get; set; }
+
+        public List<Guid>? PromotionIds { get; set; } = new();
     }
 }
